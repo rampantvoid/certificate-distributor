@@ -1,20 +1,16 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
+
+const monog_uri = process.env.MONGO_URI;
 
 const connect = async () => {
   try {
-    const response = await mongoose.connect(
-      "mongodb+srv://priyanshubutola:test1234@cluster0.utffjmv.mongodb.net/?retryWrites=true&w=majority"
-    );
+    const response = await mongoose.connect(monog_uri);
 
-    console.log("ok");
-
-    const connection = response.connection;
-
-    connection.on("connection", () => {
-      console.log("DB Connected!");
-    });
+    console.log("DB Connected!");
   } catch (error) {
     console.log(error);
+    throw new Error(error);
   }
 };
 
